@@ -1,5 +1,5 @@
 module.exports = {
-    mongodb: "mongodb://localhost:27017/isafe",
+    mongodb: "mongodb://localhost:27017/babyCare",
     mailconfig: {
         service: 'qq',
         secure: true,
