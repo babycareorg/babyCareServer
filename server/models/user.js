@@ -17,3 +17,7 @@ var UserSchema = new mongoose.Schema({
             updatedAt: 'updated'
         }
     })
+
+var UserModel = mongoose.model('user', UserSchema);
+
+module.exports = UserModel;
