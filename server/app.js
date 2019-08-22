@@ -9,6 +9,8 @@ var logger = require('morgan');
 
 var userRouter = require('./routes/user');
 
+var db = require('./config/db')         //必须要引用一下，否则不会连接数据库
+
 var app = express();
 
 // view engine setup
