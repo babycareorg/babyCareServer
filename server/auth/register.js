@@ -74,6 +74,8 @@ router.get('/', (req, res, next) => {
 
 router.get('/getCode', (req, res, next) => {
     let phone = req.query.phone;
+    var phoneNum = [];
+    phoneNum.push(phone)
     api.findOne(User, {
         mobilePhone: phone
     }).then(resq => {
@@ -99,7 +101,8 @@ router.get('/getCode', (req, res, next) => {
                                 phone: phone,
                                 code: code
                             })
-                        sendSMS(config.QcloudSms.signature, phone, params)
+
+                        sendSMS(config.QcloudSms.signature, phoneNum, params)
                     })
                 } else {
                     api.update(Code, {
@@ -109,7 +112,7 @@ router.get('/getCode', (req, res, next) => {
                             phone: phone,
                             code: code
                         })
-                    sendSMS(config.QcloudSms.signature, phone, params)
+                    sendSMS(config.QcloudSms.signature, phoneNum, params)
                 }
             }).catch(error => {
                 console.log(error)
