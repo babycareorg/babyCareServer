@@ -41,7 +41,6 @@ module.exports = {
 
     //返回第一个
     findOne(Module, data) {
-        console.log("api.findOne")
 		return new Promise((resolve, reject) => {
 			//model.findOne(需要查找的对象,callback)
 			Module.findOne(data, (error, doc) => {

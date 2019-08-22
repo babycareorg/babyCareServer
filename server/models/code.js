@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 
 var CodeSchema = new mongoose.Schema({
-    email: String,
+    phone: String,
     code: String
 },
     {
