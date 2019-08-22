@@ -23,11 +23,9 @@ router.get("/get_code", (req, res, next) => {
         res.end(JSON.stringify({status:202, msg:'邮箱非法'}))
     } else {
         
-        console.log(-1)
         api.findOne(User, {
             email: email_get
         }).then(resq => {
-            console.log(0)
             if(resq != null){
                 res.end((JSON.stringify({status:203, msg:'该邮箱已被注册'})));
             }else{
@@ -35,17 +33,13 @@ router.get("/get_code", (req, res, next) => {
                 for(let i = 0; i < 6; i++){
                     code += Math.floor(Math.random()*10);
                 }
-                console.log(1)
                 api.findOne(Code, {
                     email: email_get
                 }).then(resq => {
-                    console.log(2)
                     if (resq == null) {
-                        console.log(3)
                         api.save(Code, {
                             email: email_get,
                         }).then(res => {
-                            console.log(4)
                             api.update(Code, {
                                 email: email_get,
                             },
@@ -53,7 +47,6 @@ router.get("/get_code", (req, res, next) => {
                                 email: email_get,
                                 code: code
                                 })
-                            console.log(5)
                             sendMail(email_get, code);
                         })
                     }else{
@@ -64,7 +57,6 @@ router.get("/get_code", (req, res, next) => {
                             email: email_get,
                             code: code
                             })
-                        console.log(6)
                         sendMail(email_get, code);
                     }
                 }).catch(error => {
@@ -74,7 +66,6 @@ router.get("/get_code", (req, res, next) => {
             }
         })
 
-        // res.send("error")
     }
     
 })
