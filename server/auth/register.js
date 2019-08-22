@@ -6,79 +6,23 @@ var config = require("../config/develop")
 var User = require("../models/user");
 var Code = require("../models/code");
 
-var sendMail = require("../libs/sendEmail");
-var sendSMS = require("../libs/sendSms")
+// var sendMail = require("../libs/sendEmail");
+var ssender = require("../libs/sendSms")
 
 router.get('/', (req, res, next) => {
     res.send("success");
 })
 
-// //发送验证码
-// router.get("/get_code", (req, res, next) => {
-//     let email_get = req.query.phone
 
-//     var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$")
-//     if(email_get == '') {
-//         res.end(JSON.stringify({status:201, msg:'未填写邮箱'}))
-//     }else if(!reg.test(email_get)) {
-//         console.log("202")
-//         res.end(JSON.stringify({status:202, msg:'邮箱非法'}))
-//     } else {
-
-//         api.findOne(User, {
-//             email: email_get
-//         }).then(resq => {
-//             if(resq != null){
-//                 res.end((JSON.stringify({status:203, msg:'该邮箱已被注册'})));
-//             }else{
-//                 let code = "";
-//                 for(let i = 0; i < 6; i++){
-//                     code += Math.floor(Math.random()*10);
-//                 }
-//                 api.findOne(Code, {
-//                     email: email_get
-//                 }).then(resq => {
-//                     if (resq == null) {
-//                         api.save(Code, {
-//                             email: email_get,
-//                         }).then(res => {
-//                             api.update(Code, {
-//                                 email: email_get,
-//                             },
-//                             {
-//                                 email: email_get,
-//                                 code: code
-//                                 })
-//                             sendMail(email_get, code);
-//                         })
-//                     }else{
-//                         api.update(Code, {
-//                             email: email_get,
-//                         },
-//                         {
-//                             email: email_get,
-//                             code: code
-//                             })
-//                         sendMail(email_get, code);
-//                     }
-//                 }).catch(error => {
-//                     console.log(error)
-//                 })
-//                 res.end(JSON.stringify({status: 200, msg:'验证码已发送到邮箱'}));
-//             }
-//         })
-
-//     }
-
-// })
-
-router.get('/getCode', (req, res, next) => {
+router.get('/getCode', (req, response, next) => {
     let phone = req.query.phone;
+    var phoneNum = [];
+    phoneNum.push(phone)
     api.findOne(User, {
         mobilePhone: phone
     }).then(resq => {
         if (resq != null) {
-            res.end((JSON.stringify({ status: 203, msg: '该邮箱已被注册' })));
+            response.end((JSON.stringify({ status: 203, msg: '该手机号已被注册' })));
         } else {
             let code = "";
             for (let i = 0; i < 6; i++) {
@@ -99,7 +43,15 @@ router.get('/getCode', (req, res, next) => {
                                 phone: phone,
                                 code: code
                             })
-                        sendSMS(config.QcloudSms.signature, phone, params)
+                        ssender.sendWithParam(86, phoneNum[0], config.QcloudSms.registerTem, params, config.QcloudSms.signature, "", "", (err, respo, resData) => {
+                            if (err) {
+                                console.log('error', err)
+                                response.end(JSON.stringify({ status: 204, msg: '验证码发送失败' }));
+                            } else {
+                                response.end(JSON.stringify({ status: 200, msg: '验证码已发送' }));
+                                console.log(resData)
+                            }
+                        })
                     })
                 } else {
                     api.update(Code, {
@@ -109,12 +61,20 @@ router.get('/getCode', (req, res, next) => {
                             phone: phone,
                             code: code
                         })
-                    sendSMS(config.QcloudSms.signature, phone, params)
+                    ssender.sendWithParam(86, phoneNum[0], config.QcloudSms.registerTem, params, config.QcloudSms.signature, "", "", (err, respo, resData) => {
+                        if (err) {
+                            console.log('error', err)
+                            response.end(JSON.stringify({ status: 204, msg: '验证码发送失败' }));
+                        } else {
+                            response.end(JSON.stringify({ status: 200, msg: '验证码已发送' }));
+                            console.log(resData)
+                        }
+                    })
                 }
             }).catch(error => {
                 console.log(error)
             })
-            res.end(JSON.stringify({ status: 200, msg: '验证码已发送' }));
+            // res.end(JSON.stringify({ status: 200, msg: '验证码已发送' }));
         }
     })
 })

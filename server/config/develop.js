@@ -15,7 +15,7 @@ module.exports = {
         }
     },
     QcloudSms: {
-        appid: "1400248083",
+        appid: 1400248083,
         appkey: "d3062e19dd71552e1b6f30fd7269102d",
         signature: "bgbskcn",            //签名
         registerTem: "401924",          //注册模板
