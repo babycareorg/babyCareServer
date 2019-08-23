@@ -93,7 +93,7 @@ router.post('/adduser', (req, response, next) => {
 
     Promise.all([p1, p2]).then(resp => {
         if (resp[0] == null)
-            response.end(JSON.stringify({ status: 204, msg: '请先获取验证码再注册' }));
+            response.end(JSON.stringify({ status: 202, msg: '请先获取验证码再注册' }));
         else if (resp[1] != null)
             response.end(JSON.stringify({ status: 206, msg: '该手机号已被注册' }))
         else {
