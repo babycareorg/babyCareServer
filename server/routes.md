@@ -17,3 +17,9 @@
 #### /username    修改用户名    get  username, phone
 
 #### /imgurl        修改头像    post   image(File), phone
+
+## /bill       账单相关
+
+### /add   添加账单    get    phone, title, date, price
+
+### /get   获取账单    get    phone     返回值{bill: [账单数组]}
