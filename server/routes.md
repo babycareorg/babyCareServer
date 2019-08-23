@@ -11,3 +11,9 @@
 ### /login      登录相关
 
 #### /  直接登录      post    phone, password
+
+### /change     修改个人信息
+
+#### /username    修改用户名    get  username, phone
+
+#### /imgurl        修改头像    post   image(File), phone

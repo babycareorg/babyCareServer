@@ -10,6 +10,12 @@ var UserSchema = new mongoose.Schema({
         {
             name: String,
             birthday: String
+        },
+        {
+            timestamps: {
+                createdAt: 'created',
+                updatedAt: 'updated'
+            }
         }
     ]
 }, {
