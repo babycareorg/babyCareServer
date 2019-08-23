@@ -74,51 +74,42 @@ router.get('/getCode', (req, response, next) => {
             }).catch(error => {
                 console.log(error)
             })
-            // res.end(JSON.stringify({ status: 200, msg: '验证码已发送' }));
         }
     })
 })
 
 //添加用户
-router.post('/add_user', (req, res, next) => {
-    let email = req.body.email
+router.post('/adduser', (req, response, next) => {
+    let phone = req.body.phone
     let code = req.body.code
     let username = req.body.username
-    let password1 = req.body.password1
-    let password2 = req.body.password2
+    let password = req.body.password
+    console.log(req.body)
 
-    var p1 = api.findOne(Code, { email: email });
-    var p2 = api.findOne(User, { username: username });
 
-    console.log(req.body);
+    var p1 = api.findOne(Code, { phone: phone });
+    var p2 = api.findOne(User, { mobilePhone: phone });
+
 
     Promise.all([p1, p2]).then(resp => {
         if (resp[0] == null)
-            res.end(JSON.stringify({ status: 204, msg: '请先获取验证码再注册' }));
+            response.end(JSON.stringify({ status: 204, msg: '请先获取验证码再注册' }));
         else if (resp[1] != null)
-            res.end(JSON.stringify({ status: 206, msg: '用户名已被注册' }))
+            response.end(JSON.stringify({ status: 206, msg: '该手机号已被注册' }))
         else {
             if (resp[0].code != code)
-                res.end(JSON.stringify({ status: 205, msg: '验证码错误' }))
+                response.end(JSON.stringify({ status: 205, msg: '验证码错误' }))
             else {
-                if (password1 != password2)
-                    res.end(JSON.stringify({ status: 207, msg: '密码不一致' }))
-                else
-                    api.save(User, {
-                        email: email,
-                        username: username,
-                        password: password1,
-                        created_at: new Date().toLocaleString(),
-                        mobilePhone: "",
-                        imageUrl: '',
-                        friends: [],
-                        individuality: "",
-                        birthplace: "",
-                        livePlace: "",
-                        emergencyPhone: ""
-                    }).then(() => {
-                        res.end(JSON.stringify({ status: 200, msg: '注册成功' }))
-                    })
+                // if (password1 != password2)
+                //     res.end(JSON.stringify({ status: 207, msg: '密码不一致' }))
+                // else
+                api.save(User, {
+                    username: username,
+                    password: password,
+                    mobilePhone: phone,
+                }).then(() => {
+                    response.end(JSON.stringify({ status: 200, msg: '注册成功' }))
+                })
             }
         }
     })
