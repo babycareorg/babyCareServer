@@ -48,7 +48,11 @@ router.get('/getCode', (req, response, next) => {
                                 console.log('error', err)
                                 response.end(JSON.stringify({ status: 204, msg: '验证码发送失败' }));
                             } else {
-                                response.end(JSON.stringify({ status: 200, msg: '验证码已发送' }));
+                                if (resData.result != 0) {
+                                    response.end(resData)
+                                } else {
+                                    response.end(JSON.stringify({ status: 200, msg: '验证码已发送' }));                                    
+                                }
                                 console.log(resData)
                             }
                         })
