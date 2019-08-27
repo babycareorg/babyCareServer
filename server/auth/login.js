@@ -7,7 +7,7 @@ var User = require("../models/user")
 router.post("/", (req, response, next) => {
     let phone = req.body.phone;
     let password = req.body.password;
-    
+
     api.findOne(User, {
         mobilePhone: phone
     }).then(res => {
@@ -18,14 +18,14 @@ router.post("/", (req, response, next) => {
                 response.end(JSON.stringify({ status: 211, msg: "密码错误" }));
             } else {
                 //这里需要存储session并且保存登录状态
-                response.send(JSON.stringify({ username: res.username, phone: res.mobilePhone, status: 200, msg: "登录成功" }));
+                response.send(JSON.stringify({ created: res.created, username: res.username, phone: res.mobilePhone, status: 200, msg: "登录成功" }));
             }
         }
     })
 })
 
 router.post("/session", (req, response, next) => {
-    response.end(JSON.stringify({status: 500, msg: "接口未实现"}))
+    response.end(JSON.stringify({ status: 500, msg: "接口未实现" }))
 })
 
 module.exports = router;
