@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
     username: String,
-    email: String,
     password: String,
     imgUrl: String,
     mobilePhone: String,
@@ -10,7 +9,14 @@ var UserSchema = new mongoose.Schema({
     babys: [
         {
             name: String,
-            birthday: String
+            birthday: String,
+            sex: String
+        },
+        {
+            timestamps: {
+                createdAt: 'created',
+                updatedAt: 'updated'
+            }
         }
     ]
 }, {
