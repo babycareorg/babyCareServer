@@ -52,7 +52,7 @@ router.post('/imgurl', (req, response, next) => {
                 mobilePhone: phone
             }, {
                     imgUrl: phone + extname
-            })
+                })
         }
 
         response.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
