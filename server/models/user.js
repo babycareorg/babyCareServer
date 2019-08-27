@@ -9,7 +9,8 @@ var UserSchema = new mongoose.Schema({
     babys: [
         {
             name: String,
-            birthday: String
+            birthday: String,
+            sex: String
         },
         {
             timestamps: {
