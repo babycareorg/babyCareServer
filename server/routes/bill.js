@@ -27,7 +27,9 @@ router.get("/get", (req, response, next) => {
     Bill.find({ phone: phone },"date price title", (err, res) => {
         console.log(res)
         response.send({
-            bill: res
+            bill: res,
+            status: 200,
+            msg: "成功"
         })
     })
 })
