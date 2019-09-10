@@ -25,3 +25,11 @@
 ### /get   获取账单    get    phone     返回值{bill: [账单数组]}
 
 ### /delete 删除账单    get   id
+
+## /baby        婴儿相关
+
+### /add  添加婴儿   get  phone,name,sex, birthday
+
+## /olds     老人相关
+
+### /add 添加老人   get     phone,name,sex, birthday,emePhone

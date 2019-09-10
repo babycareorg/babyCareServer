@@ -18,6 +18,14 @@ var UserSchema = new mongoose.Schema({
                 updatedAt: 'updated'
             }
         }
+    ],
+    olds: [
+        {
+            name: String,
+            birthday: String,
+            sex: String,
+            phone: String
+        }
     ]
 }, {
         timestamps: {

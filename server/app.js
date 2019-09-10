@@ -7,7 +7,8 @@ var logger = require('morgan');
 
 var userRouter = require('./routes/user');
 var billRouter = require('./routes/bill');
-var babuRouter = require('./routes/baby')
+var babyRouter = require('./routes/baby');
+var oldsRouter = require('./routes/olds')
 
 var db = require('./config/db')         //必须要引用一下，否则不会连接数据库
 
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 app.use('/bill', billRouter);
-app.use('/baby', babuRouter);
+app.use('/baby', babyRouter);
+app.use('/olds', oldsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
