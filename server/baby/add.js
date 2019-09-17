@@ -6,7 +6,11 @@ var api = require("../libs/api");
 var User = require("../models/user");
 
 router.get("/", (req, response, next) => {
-    let newBaby;
+    let newBaby = {
+        name: "",
+        birthday: "",
+        sex: ""
+    };
     let phone = req.query.phone;
     newBaby.name = req.query.name;
     newBaby.sex = req.query.sex;
