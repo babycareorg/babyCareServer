@@ -10,7 +10,14 @@ var UserSchema = new mongoose.Schema({
         {
             name: String,
             birthday: String,
-            sex: String
+            sex: String,
+            h_w: [
+                {
+                    height: String,
+                    weight: String,
+                    time: String
+                }
+            ]
         },
         {
             timestamps: {
