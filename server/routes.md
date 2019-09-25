@@ -30,6 +30,22 @@
 
 ### /add  添加婴儿   get  phone,name,sex, birthday
 
+### /get  查找婴儿   get  phone
+
+### /data/add  添加身高体重数据  get phone, id, weight, height time
+
+### /data/get 获取身高体重数据  get phone id
+
 ## /olds     老人相关
 
 ### /add 添加老人   get     phone,name,sex, birthday,emePhone
+
+### /add 查找老人   get     phone
+
+## /share 成长信息
+
+### /upload
+
+#### /imgurl 上传图片和文字  post  phone   content  time  image
+
+### /get  获取成长信息  get  phone

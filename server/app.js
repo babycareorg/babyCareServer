@@ -8,7 +8,8 @@ var logger = require('morgan');
 var userRouter = require('./routes/user');
 var billRouter = require('./routes/bill');
 var babyRouter = require('./routes/baby');
-var oldsRouter = require('./routes/olds')
+var oldsRouter = require('./routes/olds');
+var shareRouter = require("./routes/share");
 
 var db = require('./config/db')         //必须要引用一下，否则不会连接数据库
 
@@ -29,6 +30,7 @@ app.use('/user', userRouter);
 app.use('/bill', billRouter);
 app.use('/baby', babyRouter);
 app.use('/olds', oldsRouter);
+app.use('/share', shareRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
