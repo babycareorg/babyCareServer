@@ -2,22 +2,19 @@ var express = require('express');
 var router = express.Router();
 
 
-var User = require("../models/user");
+var Baby = require("../models/baby");
 
 router.get("/", (req, response, next) => {
 
     let phone = req.query.phone;
-    newBaby.name = req.query.name;
-    newBaby.sex = req.query.sex;
-    newBaby.birthday = req.query.birthday;
-    
-    User.update({ mobilePhone: phone }, { $push: { babys: newBaby } }, (err, raw) => {
+    Baby.find({ parent: phone }, (err,doc) => {
         if (err) {
-            response.send(JSON.stringify({status: 401, msg: err}));
+            response.end(JSON.stringify({status: 403, msg: "查找数据库失败"}))
         } else {
-            response.send(JSON.stringify({ status: 200, msg: "添加成功" }));
+            response.send({babys: doc})
         }
     })
+
 })
 
 module.exports = router;

@@ -3,26 +3,24 @@ var router = express.Router();
 
 var api = require("../libs/api");
 
-var User = require("../models/user");
+var Baby = require("../models/baby");
 
 router.get("/", (req, response, next) => {
-    let newBaby = {
-        name: "",
-        birthday: "",
-        sex: ""
-    };
+
     let phone = req.query.phone;
-    newBaby.name = req.query.name;
-    newBaby.sex = req.query.sex;
-    newBaby.birthday = req.query.birthday;
-    
-    User.update({ mobilePhone: phone }, { $push: { babys: newBaby } }, (err, raw) => {
-        if (err) {
-            response.send(JSON.stringify({status: 401, msg: err}));
-        } else {
-            response.send(JSON.stringify({ status: 200, msg: "添加成功" }));
-        }
+    let name = req.query.name;
+    let sex = req.query.sex;
+    let birthday = req.query.birthday;
+
+    api.save(Baby, {
+        parent: phone,
+        name: name,
+        birthday: birthday,
+        sex: sex
+    }).then(() => {
+        response.send(JSON.stringify({ status: 200, msg: "添加成功" }));
     })
+    
 })
 
 module.exports = router;
