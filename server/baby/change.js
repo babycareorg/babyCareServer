@@ -1,6 +1,12 @@
 var express = require("express");
 var router = express.Router();
 
+var multiparty = require('multiparty');
+var fs = require('fs');
+var path = require('path')
+
+var api = require("../libs/api");
+
 var Baby = require("../models/baby");
 
 router.post("/img", (req, response, next) => {

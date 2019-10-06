@@ -5,6 +5,7 @@ var UserSchema = new mongoose.Schema({
     password: String,
     imgUrl: String,
     mobilePhone: String,
+    emergency: String,
     qq: String,
     babys: [
         {

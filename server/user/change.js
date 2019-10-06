@@ -21,6 +21,15 @@ router.get("/username", (req, response, next) => {
         })
 })
 
+router.get("/emergency", (req, response, next) => {
+    let phone = req.query.phone;
+    let emergency = req.query.emergency;
+
+    api.update(User, { mobilePhone: phone }, { emergency: emergency }).then(() => {
+        response.end(JSON.stringify({ status: 200, msg: "设置成功"}))
+    })
+})
+
 router.post('/imgurl', (req, response, next) => {
     //生成multiparty对象，并配置上传目标路径
     var form = new multiparty.Form({ uploadDir: './public/avatar/' });

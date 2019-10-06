@@ -25,7 +25,7 @@ router.post("/", (req, response, next) => {
                 let token = jwt.sign(content, secretOrPrivateKey, {
                     expiresIn: 60 * 60 * 24
                 })
-                response.send(JSON.stringify({ created: res.created, username: res.username, phone: res.mobilePhone, status: 200, msg: "登录成功", token: token, createdTime: res.createdAt, imgUrl: res.imgUrl}));
+                response.send(JSON.stringify({ created: res.created, username: res.username, phone: res.mobilePhone, status: 200, msg: "登录成功", token: token, createdTime: res.createdAt, imgUrl: res.imgUrl, emergency: res.emergency}));
             }
         }
     })

@@ -16,6 +16,8 @@
 
 #### /username    修改用户名    get  username, phone
 
+#### /emergency   修改紧急联系人 get phone  emergency
+
 #### /imgurl        修改头像    post   image(File), phone
 
 ## /bill       账单相关
