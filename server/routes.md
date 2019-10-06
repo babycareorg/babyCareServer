@@ -32,6 +32,12 @@
 
 ### /get  查找婴儿   get  phone
 
+### /change 修改婴儿信息
+
+#### /img  修改头像
+
+### /delete 删除婴儿  get id
+
 ### /data/add  添加身高体重数据  get phone, id, weight, height time
 
 ### /data/get 获取身高体重数据  get phone id
